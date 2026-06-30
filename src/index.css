@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════════════════════ */
+:root {
+  --bg-primary:       #FFFFFF;
+  --bg-secondary:     #F9FAFB;
+  --brand-primary:    #DC2626;
+  --brand-secondary:  #991B1B;
+  --brand-light:      #FEF2F2;
+  --text-primary:     #1C1C1C;
+  --text-secondary:   #6B7280;
+  --border-color:     #E5E7EB;
+  --error-color:      #D64545;
+  --font-family:      'Plus Jakarta Sans', sans-serif;
+
+  --shadow-sm:  0 1px 2px 0 rgba(0,0,0,.05);
+  --shadow-md:  0 4px 6px -1px rgba(0,0,0,.10), 0 2px 4px -1px rgba(0,0,0,.06);
+  --shadow-lg:  0 10px 15px -3px rgba(0,0,0,.10), 0 4px 6px -2px rgba(0,0,0,.05);
+
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* Spacing scale (8px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Container widths */
+  --container-padding-mobile:  16px;
+  --container-padding-tablet:  24px;
+  --container-padding-desktop: 40px;
+  --container-max:             1440px;
+  
+  /* Interactive */
+  --hover-color: #F3F4F6;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK THEME (Toggled via data-theme on html)
+═══════════════════════════════════════════════════════════════ */
+[data-theme='dark'] {
+  --bg-primary:       #14171A; /* Sleek dark background */
+  --bg-secondary:     #0D1013; /* Deep dark secondary */
+  --text-primary:     #F3F4F6;
+  --text-secondary:   #9CA3AF;
+  --border-color:     #2D333D;
+  
+  --shadow-sm:  0 1px 2px 0 rgba(0,0,0,0.3);
+  --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.5), 0 2px 4px -1px rgba(0,0,0,0.3);
+  --shadow-lg:  0 10px 15px -3px rgba(0,0,0,0.6), 0 4px 6px -2px rgba(0,0,0,0.4);
+  
+  color-scheme: dark;
+  --hover-color: #1F2937;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* Prevent horizontal scroll globally */
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-secondary);
+  /* Highly aesthetic and visible tech-dot matrix with a stronger premium green radial glow */
+  background-image: 
+    radial-gradient(ellipse at 50% -10%, rgba(220, 38, 38, 0.18) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.5' fill='%23DC2626' fill-opacity='0.12'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 24px 24px;
+  background-attachment: fixed;
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Prevent body from overflowing */
+  overflow-x: hidden;
+  width: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Premium Floating Soccer Ball Background Effect */
+body::after {
+  content: '';
+  position: fixed;
+  width: 800px;
+  height: 800px;
+  top: 50%;
+  left: 50%;
+  margin-top: -400px;
+  margin-left: -400px;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23DC2626' d='M256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 48c26.3 0 51.5 4.9 74.9 13.9l-34.4 75.3-81.1 0-34.4-75.3C204.5 52.9 229.7 48 256 48zM140.3 83.2l44.3 97H256l-37.1 82.3L150.3 313.1l-68.9-22.4C86 261 88.5 229.8 96 200.5l44.3-117.3zM70.9 116l-33.3 88.1A207 207 0 0 1 48 256c0-12.8 1.2-25.3 3.4-37.5L70.9 116zM93.5 316.5l88 28.6L226 411.3l-59 59.8a208.4 208.4 0 0 1-73.5-154.6l19.5 6.3zm162.5 147.4l-35.3-108.6 70.6-51.3 70.6 51.3-35.3 108.6A206.8 206.8 0 0 1 256 463.9zm109-52.6l-59-59.8 44.5-66.2 88-28.6 19.5-6.3A208.4 208.4 0 0 1 365 411.3zm65.6-118.8L361.7 315l-68.6-22.4L256 262.5H327.4l44.3-97L416 200.5c7.5 29.3 10 60.5 14.6 90.2zM464 256a207 207 0 0 1-10.3 64.6l-33.3-88.1 19.5 52.3C442.8 230.7 444 243.2 444 256zM371.7 83.2c23.4 12 43.8 28.2 60.4 47.9l-44.3 117.3-71.4-8.8 35.3-156.4z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.04;
+  /* Fluid circulation animation */
+  animation: circulateBall 60s infinite linear;
+}
+
+@keyframes circulateBall {
+  0%   { transform: translate(-45vw, -30vh) rotate(0deg) scale(0.8); }
+  33%  { transform: translate(35vw, 25vh) rotate(180deg) scale(1.2); }
+  66%  { transform: translate(10vw, -40vh) rotate(360deg) scale(0.9); }
+  100% { transform: translate(-45vw, -30vh) rotate(540deg) scale(0.8); }
+}
+
+img, video, iframe, svg {
+  max-width: 100%;
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-family);
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: var(--font-family);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   LAYOUT SYSTEM  — fluid container with responsive padding
+═══════════════════════════════════════════════════════════════ */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding-mobile);
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-inline: var(--container-padding-tablet);
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding-inline: var(--container-padding-desktop);
+  }
+}
+
+/* Full-bleed utility — breaks out of .container */
+.full-bleed {
+  width: 100vw;
+  margin-inline: calc(-1 * var(--container-padding-mobile));
+}
+
+@media (min-width: 640px) {
+  .full-bleed {
+    margin-inline: calc(-1 * var(--container-padding-tablet));
+  }
+}
+
+@media (min-width: 1280px) {
+  .full-bleed {
+    margin-inline: calc(-1 * var(--container-padding-desktop));
+  }
+}
+
+/* App shell */
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-layout > main {
+  flex: 1;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   UTILITY CLASSES
+═══════════════════════════════════════════════════════════════ */
+.text-brand      { color: var(--brand-primary); }
+.text-error      { color: var(--error-color); }
+.text-secondary  { color: var(--text-secondary); }
+.text-sm         { font-size: 0.875rem; }
+.text-center     { text-align: center; }
+
+.font-medium     { font-weight: 500; }
+.font-semibold   { font-weight: 600; }
+.font-bold       { font-weight: 700; }
+
+.flex            { display: flex; }
+.items-center    { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center  { justify-content: center; }
+.flex-col        { flex-direction: column; }
+
+.gap-2  { gap: 8px; }
+.gap-4  { gap: 16px; }
+.gap-6  { gap: 24px; }
+
+.w-full  { width: 100%; }
+.h-full  { height: 100%; }
+
+.mt-4   { margin-top: 16px; }

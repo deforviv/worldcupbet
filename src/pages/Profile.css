@@ -1,0 +1,239 @@
+.profile-page {
+  padding-top: 32px;
+  padding-bottom: 72px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.profile-kicker {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: var(--brand-primary);
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.profile-header h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 8px;
+}
+
+.profile-header p {
+  max-width: 640px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.profile-header-actions {
+  display: flex;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.profile-alert {
+  margin-bottom: 20px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  color: var(--error-color);
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  font-weight: 700;
+}
+
+[data-theme='dark'] .profile-alert {
+  background: rgba(220, 38, 38, 0.14);
+  border-color: rgba(220, 38, 38, 0.28);
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.profile-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-stat-card svg {
+  color: var(--brand-primary);
+}
+
+.profile-stat-card span {
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.profile-stat-card strong {
+  font-size: 1.35rem;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.profile-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.profile-panel-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-panel-title svg {
+  color: var(--brand-primary);
+}
+
+.profile-panel-title h2 {
+  font-size: 1.15rem;
+}
+
+.profile-info-list,
+.profile-settings,
+.profile-limit-form,
+.profile-action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.profile-edit-row {
+  display: grid;
+  gap: 8px;
+}
+.profile-info-list div {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.profile-info-list div:last-child {
+  border-bottom: none;
+}
+
+.profile-info-list span {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.profile-info-list strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.profile-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.profile-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--brand-primary);
+}
+
+.profile-select-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.profile-select-row select {
+  min-width: 150px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  font-weight: 700;
+}
+
+.profile-save-note {
+  color: #047857;
+  font-weight: 800;
+  font-size: 0.86rem;
+}
+
+[data-theme='dark'] .profile-save-note {
+  color: #34d399;
+}
+
+.profile-limit-form p {
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.profile-action-list a,
+.profile-action-list span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.profile-action-list a:hover {
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
+}
+
+@media (max-width: 980px) {
+  .profile-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .profile-stats,
+  .profile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .profile-header-actions,
+  .profile-info-list div,
+  .profile-select-row {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .profile-stats,
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-header-actions a,
+  .profile-header-actions button {
+    width: 100%;
+  }
+}

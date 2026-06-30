@@ -1,0 +1,198 @@
+.match-detail-page {
+  padding-top: 24px;
+  padding-bottom: 64px;
+}
+
+.match-detail-back {
+  margin-bottom: 24px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--text-primary);
+}
+
+.match-detail-layout {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.match-detail-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.match-detail-sidebar {
+  width: 340px;
+  flex-shrink: 0;
+}
+
+.match-detail-header {
+  margin-bottom: 32px;
+}
+
+.match-detail-teams {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  margin-top: 24px;
+}
+
+.detail-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.detail-flag {
+  width: 80px;
+  height: 56px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-secondary);
+}
+
+.detail-team-name {
+  font-size: 24px;
+}
+
+.detail-vs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.match-detail-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.match-detail-status--live {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #ef4444;
+}
+
+.match-detail-status--finished {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+  color: #059669;
+}
+
+.market-group {
+  margin-bottom: 32px;
+}
+
+.market-title {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.odds-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.odds-3-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.odds-2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.odds-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.odds-btn:hover {
+  border-color: var(--brand-primary);
+  background-color: var(--brand-light);
+}
+
+.odds-btn--selected {
+  border-color: var(--brand-primary);
+  background-color: var(--brand-primary);
+}
+
+.odds-btn--selected .odds-label,
+.odds-btn--selected .odds-value {
+  color: #fff;
+}
+
+.odds-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.odds-btn:disabled:hover {
+  border-color: var(--border-color);
+  background-color: var(--bg-primary);
+}
+
+.odds-label {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.odds-value {
+  font-weight: 700;
+  color: var(--brand-primary);
+}
+
+.market-empty,
+.market-notice {
+  padding: 18px;
+  background: var(--bg-primary);
+  border: 1px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-align: center;
+}
+
+.market-notice {
+  margin-top: 20px;
+}
+
+@media (max-width: 1024px) {
+  .match-detail-layout {
+    flex-direction: column;
+  }
+  
+  .match-detail-sidebar {
+    width: 100%;
+  }
+}

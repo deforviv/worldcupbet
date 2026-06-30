@@ -1,0 +1,131 @@
+/* Wallet page styles - cleaned and consolidated */
+
+.wallet-page {
+  padding-top: 40px;
+  padding-bottom: 64px;
+  font-family: var(--font-family), Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.wallet-alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 840px;
+  margin: 0 auto 24px;
+  padding: 16px 20px;
+  border-radius: var(--radius-xl);
+  font-weight: 700;
+  border: 1px solid;
+  box-shadow: var(--shadow-sm);
+}
+
+.wallet-alert--success { color: #047857; background: #ecfdf5; border-color: #a7f3d0; }
+.wallet-alert--error { color: var(--error-color); background: #fef2f2; border-color: #fecaca; }
+
+[data-theme='dark'] .wallet-alert--success { color: #34d399; background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.28); }
+[data-theme='dark'] .wallet-alert--error { background: rgba(220,38,38,0.14); border-color: rgba(220,38,38,0.28); }
+
+.wallet-layout { display: grid; grid-template-columns: 320px 1fr; gap: 32px; align-items: start; max-width: 1200px; margin: 0 auto; }
+.wallet-sidebar { width: 320px; }
+.wallet-main { min-width: 0; }
+
+.balance-card { display:flex; flex-direction:column; gap:12px; padding:28px; border-radius:var(--radius-xl); background:var(--bg-primary); border:1px solid var(--border-color); box-shadow:var(--shadow-md); }
+.wallet-sidebar .balance-card { position: sticky; top:24px; }
+.balance-amount { font-size:42px; letter-spacing:-0.8px; margin-bottom:6px; color:var(--text-primary); }
+.wallet-owner { display:flex; flex-direction:column; gap:4px; padding:10px 0 12px; color:var(--text-primary); }
+.wallet-owner span { font-weight:800; font-size:0.96rem }
+.wallet-owner small { color:var(--text-secondary); font-size:0.82rem; overflow:hidden; text-overflow:ellipsis }
+.balance-actions { display:flex; gap:12px; margin-top:10px }
+.balance-badge { display:inline-flex; align-items:center; gap:8px; background: rgba(220,38,38,0.08); color:var(--brand-primary); padding:7px 12px; border-radius:999px; font-weight:700; font-size:0.85rem }
+
+.wallet-section-title { font-size:20px; margin-bottom:18px; color:var(--text-primary) }
+.wallet-section-subtitle { color:var(--text-secondary); margin-bottom:8px }
+
+.deposit-methods { display:grid; grid-template-columns: repeat(2,1fr); gap:14px; margin-bottom:26px }
+.deposit-methods--compact { margin-bottom:0 }
+
+.method-btn { display:flex; flex-direction:row; align-items:center; gap:12px; padding:12px 16px; border:1px solid var(--border-color); border-radius:12px; background-color:var(--bg-primary); color:var(--text-secondary); font-weight:700; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease }
+.method-btn svg { width:26px !important; height:26px !important; flex-shrink:0 }
+.method-btn span { display:block; text-align:left; font-size:15px; color:var(--text-primary) }
+.method-btn, .method-btn span { white-space:nowrap }
+.method-btn:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(2,6,23,0.06) }
+.method-btn.active { border-color:var(--brand-primary); color:var(--brand-primary); background: linear-gradient(90deg, rgba(99,102,241,0.06), rgba(99,102,241,0.02)); box-shadow: 0 12px 30px rgba(99,102,241,0.08) }
+
+.deposit-form { display:flex; flex-direction:column; gap:14px; max-width:520px }
+.mt-4 { margin-top:16px }
+
+.wallet-main .select-input { width:100%; padding:14px 16px; border-radius:14px; border:1px solid var(--border-color); background:var(--bg-primary); color:var(--text-primary); font-weight:600 }
+.wallet-main .input-label { font-weight:700; margin-bottom:8px; display:inline-block; color:var(--text-secondary) }
+.wallet-main .card { padding:26px; border-radius:var(--radius-xl); background:var(--bg-primary); border:1px solid var(--border-color); box-shadow:var(--shadow-sm) }
+.wallet-main .deposit-form .input-group { width:100%; margin-bottom:8px }
+.wallet-main .deposit-form .select-input, .wallet-main .deposit-form .input-field { box-sizing:border-box }
+.wallet-main .deposit-form .input-label { color:var(--text-secondary); font-size:13px; font-weight:600; display:block }
+.wallet-main .deposit-form .input-field, .wallet-main .deposit-form .select-input { font-size:15px; padding:14px 16px; display:block; width:100% }
+.wallet-main .deposit-form .select-input { appearance:none; -webkit-appearance:none; background-image: linear-gradient(45deg, transparent 50%, var(--text-secondary) 50%), linear-gradient(135deg, var(--text-secondary) 50%, transparent 50%); background-position: calc(100% - 18px) calc(1em + 2px), calc(100% - 13px) calc(1em + 2px); background-size:6px 6px,6px 6px; background-repeat:no-repeat; padding-right:44px }
+.wallet-main .deposit-form .select-input { height:52px; border-radius:14px; box-shadow:var(--shadow-sm); border:1px solid var(--border-color); background-color:var(--bg-primary) }
+.wallet-main .deposit-form .select-input:focus { box-shadow:var(--shadow-md) }
+.wallet-main .deposit-form label[for], .wallet-main .deposit-form .input-label { margin-bottom:10px }
+
+/* Address input row with copy button */
+.wallet-address-group { width:100%; margin-bottom:8px }
+.wallet-address-input-row { display:flex; gap:12px; align-items:center }
+.wallet-address-input-row .input-field { padding:12px 14px; border-radius:12px; border:1px solid var(--border-color); background:var(--bg-primary); font-weight:700; font-size:15px }
+.wallet-address-input-row .input-field[readonly] { opacity:1 }
+.btn-copy-address { white-space:nowrap; padding:10px 16px; border-radius:12px; background:#ef4444; color:#fff; border:1px solid rgba(0,0,0,0.06); box-shadow:0 8px 18px rgba(239,68,68,0.12); font-weight:800 }
+.btn-copy-address:hover { transform:translateY(-2px) }
+.btn-copy-address.copied { background: #10B981; box-shadow:0 10px 26px rgba(16,185,129,0.12); }
+
+.deposit-instruction { color:var(--text-secondary); font-size:0.95rem; margin-top:8px; margin-bottom:10px }
+
+.history-controls { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:16px; padding:22px 24px 18px; background:var(--bg-secondary); border-bottom:1px solid var(--border-color); border-top-left-radius:var(--radius-xl); border-top-right-radius:var(--radius-xl); }
+.history-filter-list { display:flex; flex-wrap:wrap; gap:10px; }
+.history-filter-btn { border:1px solid var(--border-color); background:var(--bg-primary); color:var(--text-secondary); border-radius:999px; padding:10px 16px; font-size:0.88rem; font-weight:700; transition: all .18s ease; }
+.history-filter-btn:hover { border-color:var(--text-primary); color:var(--text-primary); }
+.history-filter-btn.active { background:var(--bg-primary); border-color:var(--brand-primary); color:var(--brand-primary); box-shadow:0 10px 24px rgba(59,130,246,0.1); }
+.history-summary { color:var(--text-secondary); font-size:0.93rem; min-width:180px; }
+.history-footer { display:flex; justify-content:center; padding:18px 24px 24px; }
+.history-toggle-btn { padding:12px 20px; border-radius:999px; border:1px solid var(--border-color); background:var(--bg-primary); color:var(--text-primary); font-weight:700; transition: transform .18s ease, box-shadow .18s ease; }
+.history-toggle-btn:hover { transform: translateY(-1px); box-shadow:var(--shadow-sm); }
+
+.transaction-list { display:grid; grid-template-columns:1fr; gap:18px; max-height:640px; overflow-y:auto; padding:20px 24px 12px; }
+
+.transaction-list::-webkit-scrollbar { width:10px; }
+.transaction-list::-webkit-scrollbar-track { background:transparent; }
+.transaction-list::-webkit-scrollbar-thumb { background:rgba(100,116,139,0.2); border-radius:999px; }
+.transaction-item { display:grid; grid-template-columns:56px minmax(0, 1fr) 150px; gap:18px; align-items:center; padding:22px; border-radius:var(--radius-xl); background:var(--bg-primary); border:1px solid var(--border-color); box-shadow:var(--shadow-sm); transition: transform .18s ease, box-shadow .18s ease }
+.transaction-item:hover { transform: translateY(-4px); box-shadow:var(--shadow-md) }
+
+.tx-icon { display:flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:16px; background-color:var(--bg-secondary); color:var(--text-primary); font-size:18px }
+.tx-icon-green { background: rgba(16, 185, 129, 0.14); color: #10B981 }
+
+.tx-body { min-width:0; display:flex; flex-direction:column; gap:10px }
+.tx-main { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap }
+.tx-title { font-size:16px; font-weight:700; color:var(--text-primary) }
+.tx-meta { display:flex; flex-wrap:wrap; gap:10px; align-items:center; color:var(--text-secondary); font-size:13px }
+.tx-date { color:var(--text-secondary); font-size:13px }
+.tx-desc { color:var(--text-secondary); font-size:13px; line-height:1.6; overflow:hidden; text-overflow:ellipsis; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical }
+
+.tx-amount-col { text-align:right; width:150px; flex-shrink:0 }
+.tx-amount-col .amount { display:block; font-weight:800; font-size:18px; color:var(--text-primary) }
+.tx-amount-col .amount.positive { color:#10B981 }
+.tx-amount-col .status { display:block; margin-top:8px }
+
+.tx-badge { display:inline-flex; align-items:center; justify-content:center; min-width:90px; padding:8px 12px; border-radius:999px; font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:0.02em }
+.tx-badge.deposit { background: rgba(16, 185, 129, 0.12); color: #047857 }
+.tx-badge.withdraw { background: rgba(220, 38, 38, 0.12); color: #991B1B }
+.tx-badge.win { background: rgba(220, 38, 38, 0.08); color: #DC2626 }
+.tx-badge.refund { background: rgba(59, 130, 246, 0.12); color: #2563EB }
+
+@media (min-width:900px) { .transaction-list { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
+
+@media (max-width:768px) {
+  .wallet-layout { grid-template-columns: 1fr; padding:0 16px }
+  .wallet-sidebar { width:100% }
+  .deposit-methods { grid-template-columns:1fr }
+  .transaction-item { grid-template-columns:44px 1fr; padding:18px }
+  .tx-amount-col { width:auto; text-align:left }
+  .tx-body { gap:10px }
+  .tx-desc { -webkit-line-clamp:3 }
+  .method-btn { width:100%; justify-content:flex-start }
+}
+

@@ -1,0 +1,19 @@
+/* App.css — only global app-shell styles, no Vite template leftovers */
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-layout > main {
+  flex: 1;
+  width: 100%;
+  /* Offset for the fixed navbar (height: 72px) */
+  padding-top: 72px;
+}
+
+/* Auth page gets its own full-screen layout — zero navbar offset */
+.app-layout > main:has(.auth-layout) {
+  padding-top: 0;
+}

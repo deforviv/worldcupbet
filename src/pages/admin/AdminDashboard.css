@@ -1,0 +1,42 @@
+.admin-page { padding: 28px 0 80px }
+.admin-topbar { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:20px 0; flex-wrap:wrap }
+.admin-topbar-left { display:flex; flex-direction:column; gap:6px; min-width:280px }
+.admin-title { font-size:24px; margin:0 }
+.admin-subtitle { color:var(--text-secondary); font-size:14px }
+.admin-topbar-actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end }
+
+.admin-container { padding-top:18px }
+.admin-banner { border-radius: var(--radius-lg); padding: 16px 18px; margin-bottom: 18px; border: 1px solid transparent; font-size: 14px; }
+.admin-banner--success { background: #ECFDF5; border-color: #A7F3D0; color: #166534 }
+.admin-banner--error { background: #FEE2E2; border-color: #FCA5A5; color: #991B1B }
+.admin-banner--info { background: #DBEAFE; border-color: #93C5FD; color: #1D4ED8 }
+
+.admin-stats { display:flex; gap:14px; margin-bottom:20px; flex-wrap:wrap }
+.admin-stat-card { flex:1 1 220px; padding:20px; text-align:center; min-width:220px }
+.admin-stat { display:flex; flex-direction:column; align-items:center }
+.admin-stat-value { font-size:22px; font-weight:900 }
+.admin-stat-label { color:var(--text-secondary); margin-top:6px }
+.admin-grids { display:flex; flex-direction:column; gap:18px }
+.admin-panel { padding:18px; min-width:0 }
+.admin-table { width:100%; min-width: 100%; border-collapse:collapse; margin-top:8px; table-layout: fixed }
+.admin-table th, .admin-table td { text-align:left; padding:12px; border-bottom:1px solid var(--border-color); word-break: break-word }
+.admin-table th { font-weight: 700; }
+.admin-actions { display:flex; flex-wrap:wrap; gap:8px }
+.table-wrap { overflow-x:auto }
+.admin-panel h3 { margin:0 0 12px 0 }
+
+.right-panels { display:flex; flex-direction:column; gap:14px }
+
+@media (max-width:900px) {
+  .admin-grids { grid-template-columns:1fr; }
+  .admin-stats { flex-direction:column }
+}
+
+@media (max-width:600px) {
+	.admin-topbar { padding:12px 0 }
+	.admin-topbar-actions { flex-direction:column-reverse; gap:8px; width:100% }
+	.admin-stats { gap:10px }
+	.admin-stat-value { font-size:18px }
+	.admin-table th, .admin-table td { padding:10px }
+}
+

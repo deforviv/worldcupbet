@@ -1,0 +1,16 @@
+---
+pid: 19096
+cwd: "C:\Users\elomk\Desktop\WorldcupBet"
+command: "Get-NetTCPConnection -LocalPort 5173,5174,5175 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }; Start-Sleep 2; cd \"C:\\Users\\elomk\\Desktop\\WorldcupBet\"; npm run dev"
+started_at: 2026-06-24T23:21:10.507Z
+running_for_ms: 235000   
+---
+
+> worldcupbet@0.0.0 dev
+> vite
+
+
+  VITE v8.0.16  ready in 547 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose

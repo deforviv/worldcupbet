@@ -1,0 +1,403 @@
+/* ═══════════════════════════════════════════════════════════════
+   FEATURED ODDS — Cotes Vedettes / Prono du Jour
+═══════════════════════════════════════════════════════════════ */
+
+.featured-odds-section {
+  margin-bottom: var(--space-12);
+}
+
+.featured-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.featured-section-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.featured-section-icon {
+  color: #f59e0b;
+}
+
+.featured-section-title {
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 700;
+}
+
+.featured-section-subtitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.featured-section-hint {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.featured-section-hint::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse-green 2s infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+}
+
+/* ── Container for multiple matches ── */
+.featured-odds-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--space-6);
+}
+
+/* ── Card ── */
+.featured-odds-card {
+  position: relative;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 28px 32px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  
+  /* Premium background gradient */
+  background-image:
+    radial-gradient(ellipse at 85% 10%, rgba(220, 38, 38, 0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 15% 90%, rgba(245, 158, 11, 0.04) 0%, transparent 50%);
+}
+
+.featured-odds-card:hover {
+  box-shadow: 0 16px 48px rgba(220, 38, 38, 0.1), 0 4px 12px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
+}
+
+.featured-accent-bar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand-primary), #f59e0b, var(--brand-primary));
+  background-size: 200% 100%;
+  animation: shimmer-bar 3s linear infinite;
+}
+
+@keyframes shimmer-bar {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* ── Header ── */
+.featured-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.featured-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.featured-zap-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #fff;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  padding: 5px 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.35);
+}
+
+.featured-competition {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Timer */
+.featured-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 6px 14px;
+  border-radius: 99px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5px;
+}
+
+.featured-timer--live {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.3);
+  animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+}
+
+.live-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: blink 1.2s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* ── Teams ── */
+.featured-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.featured-team {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1;
+}
+
+.featured-team--right {
+  align-items: flex-end;
+}
+
+.featured-flag {
+  width: 64px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  border: 2px solid rgba(255,255,255,0.15);
+}
+
+.featured-team-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.featured-vs-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 24px;
+}
+
+.featured-vs {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--brand-primary);
+  letter-spacing: -1px;
+}
+
+.featured-kickoff {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+
+/* ── Odds Row ── */
+.featured-odds-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.featured-odds-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 14px 12px;
+  border-radius: 14px;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.featured-odds-btn:hover {
+  border-color: var(--brand-primary);
+  background: rgba(220, 38, 38, 0.04);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.1);
+}
+
+.featured-odds-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.featured-odds-btn:disabled:hover {
+  border-color: var(--border-color);
+  background: var(--bg-secondary);
+  transform: none;
+  box-shadow: none;
+}
+
+.featured-odds-btn--selected {
+  background: var(--brand-primary) !important;
+  border-color: var(--brand-primary) !important;
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.35) !important;
+  transform: translateY(-3px);
+}
+
+.featured-odds-btn--selected .fob-sublabel,
+.featured-odds-btn--selected .fob-label,
+.featured-odds-btn--selected .fob-value {
+  color: rgba(255,255,255,0.9);
+}
+.featured-odds-btn--selected .fob-value {
+  color: #fff;
+}
+
+.fob-sublabel {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  transition: color 0.2s;
+}
+
+.fob-label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+
+.fob-value {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--brand-primary);
+  letter-spacing: -0.5px;
+  transition: color 0.2s;
+}
+
+.fob-check {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.9);
+  font-weight: 900;
+}
+
+/* ── Footer ── */
+.featured-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border-color);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.featured-markets {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.featured-cta-btn {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--brand-primary);
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  padding: 8px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.2px;
+}
+
+.featured-cta-btn:hover {
+  background: var(--brand-primary);
+  color: #fff;
+  border-color: var(--brand-primary);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .featured-odds-card {
+    padding: 20px 16px;
+  }
+  .featured-teams {
+    gap: 8px;
+  }
+  .featured-vs-block {
+    padding: 0 12px;
+  }
+  .featured-flag {
+    width: 48px;
+    height: 36px;
+  }
+  .featured-team-name {
+    font-size: 0.82rem;
+  }
+  .fob-value {
+    font-size: 1.2rem;
+  }
+}

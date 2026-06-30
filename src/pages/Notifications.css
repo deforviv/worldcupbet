@@ -1,0 +1,132 @@
+.notifications-page {
+  padding: 48px 0;
+}
+
+.notifications-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.notifications-header h1 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.notifications-header p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.notifications-mark-read-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+  padding: 10px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.notifications-mark-read-btn:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.notifications-list {
+  display: grid;
+  gap: 16px;
+}
+
+.notification-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 16px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  background: var(--surface);
+}
+
+.notification-card--unread {
+  border-color: var(--brand);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+.notification-card--read {
+  opacity: 0.82;
+}
+
+.notification-card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: rgba(79, 70, 229, 0.1);
+}
+
+.notification-card-body {
+  min-width: 0;
+}
+
+.notification-card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.notification-card-top strong {
+  font-size: 1rem;
+}
+
+.notification-card-top time {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.notification-card p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.notifications-empty {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 18px;
+  padding: 56px 24px;
+  border: 1px dashed var(--border);
+  border-radius: 24px;
+  background: var(--surface);
+}
+
+.notifications-empty p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.notifications-go-back {
+  border: none;
+  background: var(--brand);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.notifications-error {
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  border-radius: 18px;
+  background: rgba(244, 67, 54, 0.1);
+  color: #b00020;
+}

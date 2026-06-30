@@ -1,0 +1,427 @@
+/* ═══════════════════════════════════════════════════════════════
+   BETSLIP — Floating Ticket Drawer (Bottom Right)
+═══════════════════════════════════════════════════════════════ */
+
+.betslip-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 900;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  transform: translateY(calc(100% - 64px));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.betslip-container--open {
+  transform: translateY(0);
+}
+
+/* ── Toggle Header (always visible) ── */
+.betslip-toggle-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px 20px;
+  background: linear-gradient(135deg, #DC2626, #991b1b);
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  gap: 12px;
+}
+
+.betslip-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.betslip-toggle-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.betslip-toggle-title {
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.2px;
+}
+
+.betslip-trophy-icon {
+  color: #fbbf24;
+}
+
+.betslip-badge {
+  background: #fbbf24;
+  color: #1c1c1c;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 2px 8px;
+  border-radius: 100px;
+  min-width: 22px;
+  text-align: center;
+}
+
+.betslip-total-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+/* ── Body ── */
+.betslip-body {
+  max-height: 480px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--bg-primary);
+  padding: 0;
+}
+
+/* ── Empty State ── */
+.betslip-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 40px 24px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.betslip-empty p {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.betslip-empty span {
+  font-size: 0.85rem;
+}
+
+.betslip-success {
+  margin-top: 6px;
+  color: #047857;
+  font-size: 0.86rem;
+}
+
+.betslip-success-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 8px;
+  padding: 9px 14px;
+  border-radius: var(--radius-full);
+  background: var(--brand-primary);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.betslip-success-link:hover {
+  background: var(--brand-secondary);
+}
+
+[data-theme='dark'] .betslip-success {
+  color: #34d399;
+}
+
+.betslip-empty-icon {
+  color: var(--brand-primary);
+  opacity: 0.4;
+}
+
+.betslip-alert {
+  margin: 12px 14px 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.betslip-alert--success {
+  color: #047857;
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.betslip-alert--error {
+  color: var(--error-color);
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+[data-theme='dark'] .betslip-alert--success {
+  color: #34d399;
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.28);
+}
+
+[data-theme='dark'] .betslip-alert--error {
+  background: rgba(220, 38, 38, 0.14);
+  border-color: rgba(220, 38, 38, 0.28);
+}
+
+/* ── Bet Items ── */
+.betslip-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.betslip-mode-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 12px 14px 0;
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.betslip-mode-banner strong {
+  color: var(--text-primary);
+  font-size: 0.86rem;
+}
+
+.betslip-mode-banner span {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-align: right;
+}
+
+.betslip-item {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.betslip-item-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.betslip-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.betslip-match {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.betslip-selection {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.betslip-item-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.betslip-odds {
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--brand-primary);
+  background: var(--brand-light);
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+[data-theme='dark'] .betslip-odds {
+  background: rgba(220, 38, 38, 0.15);
+}
+
+.betslip-remove {
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.betslip-remove:hover {
+  background: #fef2f2;
+  color: var(--brand-primary);
+}
+
+[data-theme='dark'] .betslip-remove:hover {
+  background: rgba(220, 38, 38, 0.15);
+}
+
+.betslip-stake-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.betslip-coupon-stake {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.betslip-coupon-stake label {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.betslip-stake-row label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.betslip-input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.betslip-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.1);
+}
+
+.betslip-win-preview {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #10b981;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Summary ── */
+.betslip-summary {
+  padding: 16px 20px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.betslip-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.betslip-summary-row strong {
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+.betslip-summary-row--winnings strong {
+  font-size: 1.1rem;
+}
+
+.betslip-winnings {
+  color: #10b981 !important;
+}
+
+/* ── CTA Buttons ── */
+.betslip-confirm-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #DC2626, #991b1b);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.betslip-confirm-btn:hover {
+  background: linear-gradient(135deg, #ef4444, #DC2626);
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+}
+
+.betslip-confirm-btn:disabled,
+.betslip-clear-btn:disabled,
+.betslip-input:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.betslip-clear-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 12px;
+  background: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.betslip-clear-btn:hover {
+  color: var(--brand-primary);
+}
