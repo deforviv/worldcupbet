@@ -532,26 +532,33 @@
 }
 
 @media (max-width: 720px) {
+  .navbar-right {
+    gap: 8px;
+  }
+
+  .navbar-logo {
+    font-size: 1.15rem;
+    gap: 4px;
+  }
+  
   .navbar-finance {
     display: flex;
-    gap: 4px;
-    padding: 4px;
+    gap: 2px;
+    padding: 3px;
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: 100px;
-    transform: scale(0.9);
-    transform-origin: right center;
   }
   
   .navbar-deposit-btn {
     display: block;
-    padding: 6px 14px;
-    font-size: 0.8rem;
+    padding: 6px 12px;
+    font-size: 0.78rem;
   }
   
   .navbar-wallet {
-    padding: 4px 8px;
-    font-size: 0.85rem;
+    padding: 4px 6px;
+    font-size: 0.82rem;
   }
 }
 
