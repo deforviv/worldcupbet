@@ -2,11 +2,7 @@ const DEFAULT_API_PORT = 3001;
 const responseCache = new Map();
 const pendingRequests = new Map();
 
-export const API_URL =
-  import.meta.env.VITE_API_URL ||
-  (import.meta.env.DEV
-    ? '/api'
-    : `${window.location.protocol}//${window.location.hostname || 'localhost'}:${DEFAULT_API_PORT}/api`);
+export const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 export function getAuthToken() {
   return localStorage.getItem('token') || localStorage.getItem('accessToken');
