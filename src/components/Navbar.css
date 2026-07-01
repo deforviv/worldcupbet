@@ -529,7 +529,20 @@
 
 @media (max-width: 720px) {
   .navbar-finance {
+    display: flex;
+    gap: 0;
+    padding: 2px 8px;
+    background: transparent;
+    border: none;
+  }
+  
+  .navbar-deposit-btn {
     display: none;
+  }
+  
+  .navbar-wallet {
+    padding: 0;
+    font-size: 0.85rem;
   }
 }
 
