@@ -15,6 +15,7 @@ import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import { Input } from '../components/Input';
 import { authFetchJson, getAuthToken, getStoredUser } from '../config/api';
+import { useWalletData } from '../hooks/useWalletData';
 import './Profile.css';
 
 const DEFAULT_PREFS = {
@@ -41,11 +42,12 @@ export function Profile() {
   const navigate = useNavigate();
   const storedUser = getStoredUser();
   const [user, setUser] = useState(storedUser || null);
-  const [wallet, setWallet] = useState(null);
+  const { walletData, loading: loadingWallet } = useWalletData();
+  const wallet = walletData?.wallet;
   const [bets, setBets] = useState([]);
   const [coupons, setCoupons] = useState([]);
   const [loadingProfile, setLoadingProfile] = useState(true);
-  const [loadingWallet, setLoadingWallet] = useState(true);
+
   const [loadingBets, setLoadingBets] = useState(true);
   const [error, setError] = useState('');
   const [profileSaving, setProfileSaving] = useState(false);
@@ -77,30 +79,7 @@ export function Profile() {
       }
     };
 
-    async function refreshWallet() {
-      setLoadingWallet(true);
-      try {
-        const walletData = await authFetchJson('/wallet', { timeoutMs: 25000 });
-        if (!cancelled) {
-          setWallet(walletData?.wallet || null);
-        }
-      } catch (err) {
-        if (!cancelled) {
-          if (err.status === 401) {
-            navigate('/auth?mode=login', { replace: true });
-            return;
-          }
-          const errMsg = err?.message || 'Impossible de charger le portefeuille.';
-          // eslint-disable-next-line no-console
-          console.error('[Profile] refreshWallet error', err);
-          setError(errMsg);
-        }
-      } finally {
-        if (!cancelled) {
-          setLoadingWallet(false);
-        }
-      }
-    }
+
 
     async function refreshBets() {
       setLoadingBets(true);
@@ -160,16 +139,16 @@ export function Profile() {
 
     syncStoredUser();
     loadProfile();
-    refreshWallet();
+
     refreshBets();
 
-    window.addEventListener('wallet:changed', refreshWallet);
+
     window.addEventListener('bets:changed', refreshBets);
     window.addEventListener('auth:changed', syncStoredUser);
 
     return () => {
       cancelled = true;
-      window.removeEventListener('wallet:changed', refreshWallet);
+
       window.removeEventListener('bets:changed', refreshBets);
       window.removeEventListener('auth:changed', syncStoredUser);
     };

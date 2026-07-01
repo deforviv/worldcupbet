@@ -7,6 +7,7 @@ import { Tabs } from '../components/Tabs';
 import { ArrowUpRight, ArrowDownLeft, Bitcoin, CheckCircle, AlertCircle } from 'lucide-react';
 import CryptoSelect from '../components/CryptoSelect';
 import { authFetchJson, getAuthToken } from '../config/api';
+import { useWalletData } from '../hooks/useWalletData';
 import './Wallet.css';
 
 const TABS = [
@@ -53,8 +54,7 @@ export function Wallet() {
   }, [location.search]);
   const [activeTab, setActiveTab] = useState(defaultTab);
   const [depositMethod, setDepositMethod] = useState('CRYPTO');
-  const [walletData, setWalletData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { walletData, loading, error: walletError } = useWalletData();
   const [actionLoading, setActionLoading] = useState(false);
   const [notice, setNotice] = useState('');
   const [error, setError] = useState('');
@@ -96,36 +96,7 @@ export function Wallet() {
 
   const historyCanExpand = filteredTransactions.length > HISTORY_LIMIT;
 
-  async function loadWallet() {
-    setLoading(true);
-    setError('');
-    try {
-      const data = await authFetchJson('/wallet', { timeoutMs: 25000 });
-      setWalletData(data);
-    } catch (err) {
-      setError(err.message || 'Impossible de charger le portefeuille.');
-    } finally {
-      setLoading(false);
-    }
-  }
 
-  useEffect(() => {
-    const handleWalletChanged = () => {
-      if (getAuthToken()) {
-        loadWallet();
-      }
-    };
-
-    const timer = getAuthToken() ? window.setTimeout(loadWallet, 0) : null;
-    window.addEventListener('wallet:changed', handleWalletChanged);
-
-    return () => {
-      if (timer) {
-        window.clearTimeout(timer);
-      }
-      window.removeEventListener('wallet:changed', handleWalletChanged);
-    };
-  }, []);
 
   function changeTab(tab) {
     setActiveTab(tab);
@@ -177,7 +148,7 @@ export function Wallet() {
       if (screenshotInputRef.current) {
         screenshotInputRef.current.value = '';
       }
-      await loadWallet();
+      window.dispatchEvent(new Event('wallet:changed'));
       window.dispatchEvent(new Event('wallet:changed'));
     } catch (err) {
       setError(err.message || 'Dépôt impossible pour le moment.');
@@ -205,14 +176,17 @@ export function Wallet() {
     setNotice('');
 
     try {
+      // On combine la cryptomonnaie choisie avec l'adresse pour que l'admin ait les deux informations
+      const finalDestination = `[${withdrawCrypto}] ${destination}`;
+      
       await authFetchJson('/wallet/withdraw', {
         method: 'POST',
-        body: { amount, method: withdrawMethod, destination },
+        body: { amount, method: withdrawMethod, destination: finalDestination },
       });
       setNotice('Demande de retrait enregistrée. Elle apparaît maintenant dans votre historique.');
       setWithdrawAmount('');
       setWithdrawDestination('');
-      await loadWallet();
+      window.dispatchEvent(new Event('wallet:changed'));
       window.dispatchEvent(new Event('wallet:changed'));
       setActiveTab('history');
       navigate('/wallet?tab=history', { replace: true });

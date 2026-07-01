@@ -24,6 +24,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { SearchModal } from './SearchModal';
 import { authFetchJson } from '../config/api';
 import { useAuthSession } from '../hooks/useAuthSession';
+import { useWalletData } from '../hooks/useWalletData';
 import { useMatchesData } from '../hooks/useMatchesData';
 import './Navbar.css';
 
@@ -70,7 +71,8 @@ export function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
-  const [walletSummary, setWalletSummary] = useState(null);
+  const { walletData } = useWalletData();
+  const walletSummary = walletData?.wallet;
   const [unreadNotifications, setUnreadNotifications] = useState(0);
   const { upcoming } = useMatchesData();
 
@@ -99,31 +101,7 @@ export function Navbar() {
   useEffect(() => {
     let cancelled = false;
 
-    async function fetchWalletSummary() {
-      if (!isAuthenticated) {
-        setWalletSummary(null);
-        return;
-      }
 
-      try {
-        const data = await authFetchJson('/wallet', { timeoutMs: 25000 });
-        if (!cancelled) {
-          setWalletSummary(data?.wallet || null);
-        }
-      } catch {
-        if (!cancelled) {
-          setWalletSummary(null);
-        }
-      }
-    }
-
-    fetchWalletSummary();
-    window.addEventListener('wallet:changed', fetchWalletSummary);
-
-    return () => {
-      cancelled = true;
-      window.removeEventListener('wallet:changed', fetchWalletSummary);
-    };
   }, [isAuthenticated, token]);
 
   useEffect(() => {

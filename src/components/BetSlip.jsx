@@ -4,6 +4,7 @@ import { X, Trash2, TrendingUp, Trophy, Zap, ChevronUp, ChevronDown } from 'luci
 import { authFetchJson, getAuthToken } from '../config/api';
 import { computeCombinedOdds, computePotentialWin, isCouponMode } from '../utils/betSlipOdds';
 import { useAuthSession } from '../hooks/useAuthSession';
+import { useWalletData, refreshWalletData } from '../hooks/useWalletData';
 import './BetSlip.css';
 
 export function BetSlip({ bets = [], onRemoveBet, onClearAll, isOpen, onToggle }) {
@@ -12,60 +13,17 @@ export function BetSlip({ bets = [], onRemoveBet, onClearAll, isOpen, onToggle }
   const [stakes, setStakes] = useState({});
   const [couponStake, setCouponStake] = useState('');
   const [placing, setPlacing] = useState(false);
-  const [walletLoading, setWalletLoading] = useState(false);
+  const { walletData, loading: walletLoading } = useWalletData();
+  const wallet = walletData?.wallet;
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const [wallet, setWallet] = useState(null);
 
   const walletBalance = Number(wallet?.balance || 0);
   const isCoupon = isCouponMode(bets);
   const combinedOdds = computeCombinedOdds(bets);
   const hasDuplicateMatch = new Set(bets.map(bet => bet.matchId)).size !== bets.length;
 
-  useEffect(() => {
-    let cancelled = false;
 
-    async function loadWallet({ showLoading = false } = {}) {
-      if (!isAuthenticated) {
-        if (!cancelled) {
-          setWallet(null);
-          setWalletLoading(false);
-        }
-        return;
-      }
-
-      if (showLoading) {
-        setWalletLoading(true);
-      }
-      try {
-        const data = await authFetchJson('/wallet', { timeoutMs: 25000 });
-        if (!cancelled) {
-          setWallet(data?.wallet || null);
-        }
-      } catch {
-        if (!cancelled) {
-          setWallet(null);
-        }
-      } finally {
-        if (!cancelled) {
-          setWalletLoading(false);
-        }
-      }
-    }
-
-    const handleWalletChanged = () => loadWallet({ showLoading: false });
-    const handleAuthChanged = () => loadWallet({ showLoading: true });
-
-    loadWallet({ showLoading: true });
-    window.addEventListener('wallet:changed', handleWalletChanged);
-    window.addEventListener('auth:changed', handleAuthChanged);
-
-    return () => {
-      cancelled = true;
-      window.removeEventListener('wallet:changed', handleWalletChanged);
-      window.removeEventListener('auth:changed', handleAuthChanged);
-    };
-  }, [isAuthenticated]);
 
   const updateStake = (betId, value) => {
     console.info('[BetSlip] updateStake', betId, value);
@@ -98,10 +56,8 @@ export function BetSlip({ bets = [], onRemoveBet, onClearAll, isOpen, onToggle }
   }).format(Number(amount || 0))}`;
 
   const refreshWallet = async () => {
-    const data = await authFetchJson('/wallet', { timeoutMs: 25000 });
-    const nextWallet = data?.wallet || null;
-    setWallet(nextWallet);
-    return nextWallet;
+    const data = await refreshWalletData(true);
+    return data?.wallet || null;
   };
 
   const placeBets = async () => {

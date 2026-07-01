@@ -8,10 +8,11 @@ async function ensureWelcomeBonus(userId) {
     // Use a lightweight check first
     const user = await prisma.user.findUnique({
       where: { id: userId },
-      select: { welcomeBonusClaimed: true, wallet: { select: { balance: true } } },
+      select: { welcomeBonusClaimed: true, role: true, wallet: { select: { balance: true } } },
     });
 
-    if (!user || user.welcomeBonusClaimed || !user.wallet) return;
+    // Admins never receive the welcome bonus
+    if (!user || user.welcomeBonusClaimed || !user.wallet || user.role === 'ADMIN') return;
 
     // Only run transaction if bonus needs to be claimed
     await prisma.$transaction(async (tx) => {

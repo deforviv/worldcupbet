@@ -2,16 +2,18 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, ArrowRight, ChevronLeft, Eye, EyeOff, CheckCircle } from 'lucide-react';
 import { API_URL, authFetchJson, setAuthSession } from '../config/api';
+import { refreshWalletData } from '../hooks/useWalletData';
+import './Auth.css';
 
 async function primeWalletSession() {
   try {
-    await authFetchJson('/wallet', { timeoutMs: 25000 });
+    await refreshWalletData(true);
     window.dispatchEvent(new Event('wallet:changed'));
   } catch {
     // Wallet priming is best-effort; betting also credits the welcome bonus server-side.
   }
 }
-import './Auth.css';
+
 
 /* ─────────────────────────────────────────────────────────────
    PASSWORD STRENGTH ENGINE

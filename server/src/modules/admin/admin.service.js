@@ -44,17 +44,17 @@ async function getAllUsers({ page = 1, limit = 50 }) {
 
 async function getPendingWithdrawals() {
   return prisma.withdrawal.findMany({
-    where: { status: 'PENDING' },
     include: { user: { select: { username: true, email: true } } },
-    orderBy: { createdAt: 'asc' },
+    orderBy: { createdAt: 'desc' },
+    take: 100,
   });
 }
 
 async function getPendingDepositRequests() {
   return prisma.depositRequest.findMany({
-    where: { status: 'PENDING' },
     include: { user: { select: { username: true, email: true } } },
-    orderBy: { createdAt: 'asc' },
+    orderBy: { createdAt: 'desc' },
+    take: 100,
   });
 }
 
@@ -130,10 +130,25 @@ async function updateWithdrawal(id, { status, adminNote }) {
         },
       }),
     ]);
+    
+    await notificationsService.createNotification(withdrawal.userId, {
+      title: 'Retrait refusé',
+      message: `Votre demande de retrait de ${withdrawal.amount} € a été refusée et les fonds ont été recrédités sur votre solde.`,
+    });
+    
     return { message: 'Withdrawal rejected and funds refunded' };
   }
 
-  return prisma.withdrawal.update({ where: { id }, data: updates });
+  const updatedWithdrawal = await prisma.withdrawal.update({ where: { id }, data: updates });
+
+  if (status === 'APPROVED') {
+    await notificationsService.createNotification(withdrawal.userId, {
+      title: 'Retrait approuvé',
+      message: `Votre demande de retrait de ${withdrawal.amount} € a été approuvée et traitée avec succès.`,
+    });
+  }
+
+  return updatedWithdrawal;
 }
 
 async function getSettlementLogs({ page = 1, limit = 50 }) {
