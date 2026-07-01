@@ -1,11 +1,11 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, Trophy, Ticket, BookOpen, User } from 'lucide-react';
+import { Menu, X, Trophy, Ticket, BookOpen, User } from 'lucide-react';
 import { useBetSlip } from '../hooks/useBetSlip';
 import { useAuthSession } from '../hooks/useAuthSession';
 import { useState } from 'react';
 import './MobileBottomNav.css';
 
-export function MobileBottomNav({ onMenuOpen }) {
+export function MobileBottomNav({ onMenuOpen, isOpen }) {
   const location = useLocation();
   const navigate = useNavigate();
   const { bets } = useBetSlip();
@@ -42,10 +42,10 @@ export function MobileBottomNav({ onMenuOpen }) {
       <button
         className="mobile-bottom-nav__item"
         onClick={onMenuOpen}
-        aria-label="Menu principal"
+        aria-label={isOpen ? "Fermer le menu" : "Menu principal"}
       >
-        <Menu size={22} />
-        <span>Menu</span>
+        {isOpen ? <X size={22} /> : <Menu size={22} />}
+        <span>{isOpen ? 'Fermer' : 'Menu'}</span>
       </button>
 
       {/* Sports */}

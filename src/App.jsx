@@ -33,7 +33,7 @@ function Layout({ children }) {
       {!isAuthPage && <Footer />}
       {!isAuthPage && <ScrollToTop />}
       {!isAuthPage && !isAdminPage && (
-        <MobileBottomNav onMenuOpen={() => setMobileMenuOpen(true)} />
+        <MobileBottomNav isOpen={mobileMenuOpen} onMenuOpen={() => setMobileMenuOpen(prev => !prev)} />
       )}
     </div>
   );

@@ -327,15 +327,6 @@ export function Navbar({ menuOpen: externalMenuOpen, onMenuToggle }) {
                 <Link to="/auth?mode=register" className="navbar-register-btn">S'inscrire</Link>
               </div>
             )}
-
-            {/* Hamburger — visible seulement sur mobile/tablet */}
-            <button
-              className="navbar-hamburger"
-              aria-label="Menu"
-              onClick={() => setIsMenuOpen(o => !o)}
-            >
-              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
           </div>
         </div>
 
@@ -345,6 +336,26 @@ export function Navbar({ menuOpen: externalMenuOpen, onMenuToggle }) {
 
       {/* ── Mobile Drawer ── */}
       <div className={`mobile-drawer ${isMenuOpen ? 'mobile-drawer--open' : ''}`}>
+        <div className="mobile-drawer-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <span style={{ fontSize: '1.2rem', fontWeight: '800', color: 'var(--text-primary)' }}>Menu</span>
+          <button 
+            onClick={() => setIsMenuOpen(false)} 
+            aria-label="Fermer" 
+            style={{ 
+              background: 'var(--bg-secondary)', 
+              border: '1px solid var(--border-color)', 
+              borderRadius: '50%', 
+              width: '36px', 
+              height: '36px', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center', 
+              color: 'var(--text-primary)' 
+            }}
+          >
+            <X size={20} />
+          </button>
+        </div>
         <nav className="mobile-nav">
           <Link to="/" className="mobile-nav-link" onClick={(e) => handleNavClick(e, 'sports')}>
             Sports
