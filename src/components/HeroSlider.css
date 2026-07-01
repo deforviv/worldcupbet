@@ -234,29 +234,40 @@
    BREAKPOINTS
 ───────────────────────────────────────────────────────────── */
 
-/* Mobile (< 640px): hide player frame, use full width for text */
+/* Mobile (< 640px): show player frame, scaled down */
 @media (max-width: 639px) {
   .hero-slide-player-wrapper {
-    display: none;
+    width: clamp(90px, 28vw, 130px);
+    height: clamp(110px, 34vw, 155px);
+    right: clamp(8px, 2.5vw, 16px);
   }
 
   .hero-slide-content {
-    max-width: 100%;
-    padding: 24px 20px;
+    /* Leave room on the right for the player image */
+    max-width: calc(100% - clamp(100px, 32vw, 145px));
+    padding: 20px 16px;
+  }
+
+  .hero-slide-title {
+    font-size: clamp(1rem, 5vw, 1.4rem);
+  }
+
+  .hero-slide-subtitle {
+    font-size: clamp(0.75rem, 3vw, 0.9rem);
   }
 
   .hero-slider-indicators {
     bottom: 14px;
-    left: 20px;
+    left: 16px;
   }
 
   .hero-slider-dot {
-    width: 20px;
+    width: 18px;
     height: 3px;
   }
 
   .hero-slider-dot.active {
-    width: 32px;
+    width: 28px;
   }
 }
 
