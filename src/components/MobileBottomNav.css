@@ -31,21 +31,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 2px;
   flex: 1;
-  padding: 8px 4px;
-  font-size: 0.68rem;
+  min-width: 0; /* prevent flex blowout */
+  padding: 6px 2px;
+  font-size: 0.6rem;
   font-weight: 700;
   color: var(--text-secondary);
   text-decoration: none;
   text-transform: uppercase;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.2px;
   background: transparent;
   border: none;
   cursor: pointer;
   transition: color 0.2s ease, transform 0.15s ease;
   position: relative;
   -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .mobile-bottom-nav__item:active {

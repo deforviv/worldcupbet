@@ -83,20 +83,28 @@ html {
 body {
   font-family: var(--font-family);
   background-color: var(--bg-secondary);
-  /* Highly aesthetic and visible tech-dot matrix with a stronger premium green radial glow */
+  /* Dot matrix pattern — scroll (not fixed) to avoid breaking position:fixed on iOS/Android */
   background-image: 
     radial-gradient(ellipse at 50% -10%, rgba(220, 38, 38, 0.18) 0%, transparent 70%),
     url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='2' cy='2' r='1.5' fill='%23DC2626' fill-opacity='0.12'/%3E%3C/svg%3E");
   background-size: 100% 100%, 24px 24px;
-  background-attachment: fixed;
+  /* CRITICAL: background-attachment:fixed is broken on iOS/Android and causes
+     position:fixed elements (navbar, bottom nav) to scroll away. Use scroll. */
+  background-attachment: scroll;
   color: var(--text-primary);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* Prevent body from overflowing */
   overflow-x: hidden;
   width: 100%;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Restore fixed background on desktop only (safe, no fixed-position children affected) */
+@media (min-width: 900px) {
+  body {
+    background-attachment: fixed;
+  }
 }
 
 /* Premium Floating Soccer Ball Background Effect */

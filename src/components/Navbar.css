@@ -533,7 +533,7 @@
 
 @media (max-width: 720px) {
   .navbar-right {
-    gap: 8px;
+    gap: 6px;
   }
 
   .navbar-logo {
@@ -556,9 +556,15 @@
     font-size: 0.78rem;
   }
   
+  /* Hide balance text on small screens — too wide for navbar */
   .navbar-wallet {
-    padding: 4px 6px;
-    font-size: 0.82rem;
+    padding: 4px 8px;
+    font-size: 0;
+    gap: 0;
+  }
+  .navbar-wallet svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
