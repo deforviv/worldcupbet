@@ -614,9 +614,18 @@
 /* Wrapper : hint + tabs côte à côte */
 .matches-tabs-wrapper {
   display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .matches-tabs-wrapper {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+  }
 }
 
 /* Texte indicateur avec flèche */
@@ -645,14 +654,25 @@
 }
 
 .matches-tabs {
-  display: inline-flex;
-  flex-wrap: wrap;
+  display: flex;
   background: var(--bg-secondary);
   border-radius: 14px;
   padding: 6px;
   gap: 8px;
   border: 1px solid var(--border-color);
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+}
+.matches-tabs::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+@media (min-width: 768px) {
+  .matches-tabs {
+    width: auto;
+  }
 }
 
 .tab-btn {
@@ -669,6 +689,7 @@
   letter-spacing: 0.5px;
   opacity: 0.6;
   white-space: nowrap; /* Prevent button text from wrapping/squishing */
+  flex-shrink: 0;
 }
 
 .tab-btn:hover {
@@ -691,8 +712,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
   margin-top: var(--space-8);
+  flex-wrap: wrap;
 }
 
 .pagination-btn {
@@ -705,6 +727,7 @@
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 
 .pagination-btn:disabled {
@@ -720,7 +743,9 @@
 
 .pagination-numbers {
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .pagination-number {
