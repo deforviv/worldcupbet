@@ -642,6 +642,19 @@
   opacity: 0.75;
 }
 
+.swipe-hint {
+  font-size: 0.7rem;
+  color: var(--brand-primary);
+  opacity: 0.8;
+  font-weight: 800;
+}
+
+@media (min-width: 768px) {
+  .swipe-hint {
+    display: none;
+  }
+}
+
 .filter-hint-icon {
   color: var(--brand-primary);
   animation: nudge 1.6s ease-in-out infinite;

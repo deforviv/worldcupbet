@@ -354,7 +354,7 @@ export function Dashboard() {
         
         <div className="matches-tabs-wrapper">
           <div className="filter-hint">
-            <span>Sélectionnez une période</span>
+            <span>Sélectionnez une période <span className="swipe-hint">(Glissez ↔)</span></span>
             <ArrowRight size={16} className="filter-hint-icon" />
           </div>
           <div className="matches-tabs">
