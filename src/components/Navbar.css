@@ -109,14 +109,14 @@
 
 /* Icon buttons (Search, Bell) */
 .navbar-icons {
-  display: none;
+  display: flex;
   gap: 4px;
   align-items: center;
 }
 
-@media (min-width: 768px) {
-  .navbar-icons {
-    display: flex;
+@media (max-width: 767px) {
+  .desktop-only {
+    display: none !important;
   }
 }
 
@@ -523,6 +523,10 @@
   }
 
   .navbar-profile-name {
+    display: none;
+  }
+
+  .navbar-profile-wrap {
     display: none;
   }
 }

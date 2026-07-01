@@ -236,17 +236,17 @@ export function Navbar() {
           </div>
 
           <div className="navbar-right">
-            {/* Icône Thème et Recherche : toujours visible */}
+            {/* Icône Thème et Recherche : visibles sur desktop, Bell visible partout */}
             <div className="navbar-icons">
-              <button className="icon-btn theme-toggle-btn" aria-label="Changer de thème" onClick={toggleTheme}>
+              <button className="icon-btn theme-toggle-btn desktop-only" aria-label="Changer de thème" onClick={toggleTheme}>
                 {isDark ? <Sun size={20} /> : <Moon size={20} />}
               </button>
-              <button className="icon-btn" aria-label="Recherche" onClick={() => setIsSearchOpen(true)}>
+              <button className="icon-btn desktop-only" aria-label="Recherche" onClick={() => setIsSearchOpen(true)}>
                 <Search size={20} />
               </button>
 
               {isAuthenticated && (
-                <button className="icon-btn" aria-label="Notifications" onClick={handleNotificationsClick}>
+                <button className="icon-btn notification-btn" aria-label="Notifications" onClick={handleNotificationsClick}>
                   <Bell size={20} />
                   {unreadNotifications > 0 && (
                     <span className="notification-badge">
