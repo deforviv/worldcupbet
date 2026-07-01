@@ -75,8 +75,9 @@
 }
 
 html {
-  /* Prevent horizontal scroll globally */
-  overflow-x: hidden;
+  /* overflow-x:clip (NOT hidden) — clip doesn't create a scroll container
+     so it never breaks position:fixed on iOS Safari. This is the correct fix. */
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
 
@@ -95,7 +96,8 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  /* overflow-x:clip (NOT hidden) — same reason as html above */
+  overflow-x: clip;
   width: 100%;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -110,7 +112,10 @@ body {
 /* Premium Floating Soccer Ball Background Effect */
 body::after {
   content: '';
-  position: fixed;
+  /* On mobile: position:absolute so transform-animation doesn't corrupt the
+     fixed stacking context (known Chrome Android/iOS Safari rendering bug).
+     On desktop: overridden to position:fixed below. */
+  position: absolute;
   width: 800px;
   height: 800px;
   top: 50%;
@@ -123,8 +128,14 @@ body::after {
   background-size: contain;
   background-repeat: no-repeat;
   opacity: 0.04;
-  /* Fluid circulation animation */
   animation: circulateBall 60s infinite linear;
+}
+
+/* On desktop: safe to use position:fixed + transforms, no mobile bugs */
+@media (min-width: 900px) {
+  body::after {
+    position: fixed;
+  }
 }
 
 @keyframes circulateBall {
