@@ -202,3 +202,24 @@
     width: 100%;
   }
 }
+
+@media (max-width: 640px) {
+  .match-detail-teams {
+    gap: 16px;
+  }
+
+  .detail-team-name {
+    font-size: 16px;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  .detail-flag {
+    width: 56px;
+    height: 40px;
+  }
+  
+  .detail-vs {
+    font-size: 16px;
+  }
+}
