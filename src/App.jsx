@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { ScrollToTop } from './components/ScrollToTop';
+import { MobileBottomNav } from './components/MobileBottomNav';
 import { Dashboard } from './pages/Dashboard';
 import { MatchDetail } from './pages/MatchDetail';
 import { Wallet } from './pages/Wallet';
@@ -20,13 +22,19 @@ function Layout({ children }) {
   const location = useLocation();
   const isAuthPage = location.pathname === '/auth';
   const isAdminPage = location.pathname.startsWith('/admin');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="app-layout">
-      {!isAuthPage && !isAdminPage && <Navbar />}
+      {!isAuthPage && !isAdminPage && (
+        <Navbar menuOpen={mobileMenuOpen} onMenuToggle={setMobileMenuOpen} />
+      )}
       <main>{children}</main>
       {!isAuthPage && <Footer />}
       {!isAuthPage && <ScrollToTop />}
+      {!isAuthPage && !isAdminPage && (
+        <MobileBottomNav onMenuOpen={() => setMobileMenuOpen(true)} />
+      )}
     </div>
   );
 }

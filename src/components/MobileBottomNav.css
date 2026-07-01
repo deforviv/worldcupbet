@@ -1,0 +1,123 @@
+/* ═══════════════════════════════════════════════════════════
+   MOBILE BOTTOM NAV — Barre de navigation fixe en bas
+   Visible uniquement sur mobile (< 900px)
+═══════════════════════════════════════════════════════════ */
+
+.mobile-bottom-nav {
+  display: none; /* Hidden by default, shown on mobile */
+}
+
+@media (max-width: 899px) {
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: var(--bg-primary);
+    border-top: 2px solid var(--brand-primary);
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.18);
+    height: 62px;
+    align-items: stretch;
+    justify-content: space-around;
+    padding-bottom: env(safe-area-inset-bottom, 0); /* iPhone notch support */
+  }
+}
+
+/* ── Each nav item ─────────────────────────────────────── */
+.mobile-bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex: 1;
+  padding: 8px 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.15s ease;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-bottom-nav__item:active {
+  transform: scale(0.93);
+}
+
+.mobile-bottom-nav__item svg {
+  transition: color 0.2s ease;
+}
+
+/* ── Active state ─────────────────────────────────────── */
+.mobile-bottom-nav__item--active {
+  color: var(--brand-primary);
+}
+
+.mobile-bottom-nav__item--active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 3px;
+  background: var(--brand-primary);
+  border-radius: 0 0 4px 4px;
+}
+
+/* ── Coupon/BetSlip item — highlighted ────────────────── */
+.mobile-bottom-nav__coupon-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-bottom-nav__item--has-bets {
+  color: var(--brand-primary);
+}
+
+.mobile-bottom-nav__item--has-bets svg {
+  filter: drop-shadow(0 0 6px rgba(220, 38, 38, 0.5));
+}
+
+/* ── Badge on coupon ──────────────────────────────────── */
+.mobile-bottom-nav__badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--brand-primary);
+  color: #ffffff;
+  border-radius: 99px;
+  font-size: 0.62rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 2px 8px rgba(220, 38, 38, 0.4);
+  animation: badge-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes badge-pop {
+  from { transform: scale(0); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+/* ── Ensure page content doesn't get hidden behind the bottom nav ── */
+@media (max-width: 899px) {
+  body {
+    padding-bottom: 62px;
+  }
+}

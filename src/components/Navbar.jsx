@@ -57,7 +57,7 @@ function getInitials(user) {
     .join('') || 'U';
 }
 
-export function Navbar() {
+export function Navbar({ menuOpen: externalMenuOpen, onMenuToggle }) {
   const navigate = useNavigate();
   const profileMenuRef = useRef(null);
   const { token, user, isAuthenticated, logout } = useAuthSession();
@@ -71,6 +71,10 @@ export function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+
+  // Allow parent to control mobile drawer open state (from MobileBottomNav)
+  const isMenuOpen = externalMenuOpen !== undefined ? externalMenuOpen : menuOpen;
+  const setIsMenuOpen = onMenuToggle || setMenuOpen;
   const { walletData } = useWalletData();
   const walletSummary = walletData?.wallet;
   const [unreadNotifications, setUnreadNotifications] = useState(0);
@@ -165,7 +169,7 @@ export function Navbar() {
   };
 
   const closeMenus = () => {
-    setMenuOpen(false);
+    setIsMenuOpen(false);
     setProfileOpen(false);
   };
 
@@ -194,9 +198,9 @@ export function Navbar() {
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [menuOpen]);
+  }, [isMenuOpen]);
 
   const renderAccountLink = (item, className = 'account-menu-link') => {
     const Icon = item.icon;
@@ -328,9 +332,9 @@ export function Navbar() {
             <button
               className="navbar-hamburger"
               aria-label="Menu"
-              onClick={() => setMenuOpen(o => !o)}
+              onClick={() => setIsMenuOpen(o => !o)}
             >
-              {menuOpen ? <X size={22} /> : <Menu size={22} />}
+              {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
@@ -340,7 +344,7 @@ export function Navbar() {
       </header>
 
       {/* ── Mobile Drawer ── */}
-      <div className={`mobile-drawer ${menuOpen ? 'mobile-drawer--open' : ''}`}>
+      <div className={`mobile-drawer ${isMenuOpen ? 'mobile-drawer--open' : ''}`}>
         <nav className="mobile-nav">
           <Link to="/" className="mobile-nav-link" onClick={(e) => handleNavClick(e, 'sports')}>
             Sports
@@ -394,8 +398,8 @@ export function Navbar() {
       </div>
 
       {/* Backdrop */}
-      {menuOpen && (
-        <div className="mobile-backdrop" onClick={() => setMenuOpen(false)} />
+      {isMenuOpen && (
+        <div className="mobile-backdrop" onClick={() => setIsMenuOpen(false)} />
       )}
     </>
   );

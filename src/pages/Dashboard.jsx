@@ -156,7 +156,15 @@ export function Dashboard() {
   // Track time once for all countdowns to avoid per-card timers
   useEffect(() => {
     const timer = window.setInterval(() => setCurrentTime(Date.now()), 1000);
-    return () => window.clearInterval(timer);
+    
+    // Custom event to open BetSlip from anywhere (e.g. mobile bottom nav)
+    const handleToggleBetSlip = () => setBetSlipOpen(true);
+    window.addEventListener('openBetSlip', handleToggleBetSlip);
+    
+    return () => {
+      window.clearInterval(timer);
+      window.removeEventListener('openBetSlip', handleToggleBetSlip);
+    };
   }, []);
 
   const { formattedUpcoming, formattedFinished } = useMemo(() => {
