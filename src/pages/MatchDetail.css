@@ -126,6 +126,12 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+@media (max-width: 640px) {
+  .odds-3-cols, .odds-2-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
 .odds-btn {
   display: flex;
   justify-content: space-between;
