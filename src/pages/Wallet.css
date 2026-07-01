@@ -83,7 +83,7 @@
 .wallet-sidebar .balance-card { position: sticky; top: 32px; }
 
 .balance-amount { 
-  font-size: 48px; 
+  font-size: clamp(2.2rem, 8vw, 48px); 
   letter-spacing: -1px; 
   font-weight: 800;
   margin-bottom: 8px; 
@@ -182,6 +182,7 @@
   padding: 16px 20px; 
   display: block; 
   width: 100%;
+  min-width: 0;
   height: 56px;
   border-radius: 16px; 
   border: 1px solid var(--border-color); 
@@ -363,7 +364,7 @@
 @media (min-width: 900px) { .transaction-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 @media (max-width: 768px) {
-  .wallet-layout { grid-template-columns: 1fr; padding: 0 16px; gap: 24px; }
+  .wallet-layout { grid-template-columns: minmax(0, 1fr); padding: 0; gap: 24px; width: 100%; }
   .wallet-sidebar .balance-card { position: static; }
   .balance-card { padding: 24px; }
   .wallet-main .card { padding: 24px; }
