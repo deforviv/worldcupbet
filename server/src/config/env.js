@@ -12,8 +12,9 @@ const REQUIRED_ENV = [
 
 for (const key of REQUIRED_ENV) {
   if (!process.env[key]) {
-    console.error(`❌ Missing required environment variable: ${key}`);
-    process.exit(1);
+    console.warn(`⚠️ Warning: Missing required environment variable: ${key}`);
+    // We don't process.exit(1) here because in Vercel Serverless, it causes hard 500s 
+    // and hides the logs. It's better to fail gracefully later when the variable is used.
   }
 }
 

@@ -34,6 +34,10 @@ app.use(cors({
       return callback(null, true);
     }
 
+    if (origin && origin.endsWith('.vercel.app')) {
+      return callback(null, true);
+    }
+
     return callback(new Error(`Origin ${origin} not allowed by CORS`));
   },
   credentials: true,
