@@ -58,6 +58,7 @@ function getInitials(user) {
 }
 
 export function Navbar({ menuOpen: externalMenuOpen, onMenuToggle }) {
+  const location = useLocation();
   const navigate = useNavigate();
   const profileMenuRef = useRef(null);
   const { token, user, isAuthenticated, logout } = useAuthSession();
@@ -226,7 +227,7 @@ export function Navbar({ menuOpen: externalMenuOpen, onMenuToggle }) {
               <span>WorldCupBet</span>
             </Link>
             <nav className="navbar-nav">
-              <Link to="/" className="nav-link active" onClick={(e) => handleNavClick(e, 'sports')}>Sports</Link>
+              <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} onClick={(e) => handleNavClick(e, 'sports')}>Sports</Link>
               <Link to="/#sports" className="nav-link nav-link--live" onClick={(e) => handleNavClick(e, 'sports')}>
                 <Radio size={13} />
                 En Direct

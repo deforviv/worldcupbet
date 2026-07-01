@@ -92,7 +92,7 @@ export function MobileBottomNav({ onMenuOpen, isOpen }) {
 
       {/* Compte */}
       <button
-        className={`mobile-bottom-nav__item ${isActive('/profile') || isActive('/auth') ? 'mobile-bottom-nav__item--active' : ''}`}
+        className={`mobile-bottom-nav__item ${isActive('/profile') || isActive('/auth') || isActive('/wallet') ? 'mobile-bottom-nav__item--active' : ''}`}
         onClick={handleCompteClick}
         aria-label="Mon compte"
       >
