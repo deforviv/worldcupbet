@@ -5,6 +5,9 @@ const REQUIRED_ENV = [
   'JWT_SECRET',
   'JWT_REFRESH_SECRET',
   'FOOTBALL_DATA_API_KEY',
+  'CLOUDINARY_CLOUD_NAME',
+  'CLOUDINARY_API_KEY',
+  'CLOUDINARY_API_SECRET',
 ];
 
 for (const key of REQUIRED_ENV) {
@@ -41,6 +44,12 @@ module.exports = {
 
   frontend: {
     url: process.env.FRONTEND_URL || 'http://localhost:5173',
+  },
+
+  cloudinary: {
+    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+    apiKey:    process.env.CLOUDINARY_API_KEY,
+    apiSecret: process.env.CLOUDINARY_API_SECRET,
   },
 
   rateLimit: {

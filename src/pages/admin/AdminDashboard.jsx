@@ -26,11 +26,9 @@ function StatCard({ label, value, sub, accent }) {
 /* ─── Screenshot modal ────────────────────────────────── */
 function ScreenshotModal({ url, onClose }) {
   if (!url) return null;
-  // Build the full URL for the screenshot
-  const fullUrl = url.startsWith('http') 
-    ? url 
-    : (import.meta.env.DEV ? `http://localhost:3001${url}` : `${API_URL.replace('/api', '')}${url}`);
-  const filename = url.split('/').pop();
+  // Cloudinary URLs are already absolute (https://res.cloudinary.com/...)
+  const fullUrl = url;
+  const filename = url.split('/').pop().split('?')[0];
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -149,17 +147,8 @@ export function AdminDashboard() {
     }
   }
 
-  const buildScreenshotUrl = (url) => {
-    if (!url) return null;
-    if (url.startsWith('http')) return url;
-    
-    // En développement, API_URL est '/api', donc on force l'URL du backend
-    if (import.meta.env.DEV) {
-      return `http://localhost:3001${url}`;
-    }
-    // En production
-    return `${API_URL.replace('/api', '')}${url}`;
-  };
+  // Cloudinary URLs are already absolute (https://res.cloudinary.com/...)
+  const buildScreenshotUrl = (url) => url || null;
 
   /* ─── TABS ──────────────────────────────────────────── */
   const TABS = [
