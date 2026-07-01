@@ -162,11 +162,7 @@ export function AdminDashboard() {
       {/* TOP BAR */}
       <div className="admin-topbar">
         <div className="admin-topbar-left">
-          <div className="admin-brand">
-            <span className="admin-brand-icon">⚡</span>
-            <span className="admin-brand-name">WorldCupBet Admin</span>
-          </div>
-          <h1 className="admin-title">Tableau de bord</h1>
+          <h1 className="admin-title">Tableau de bord Administrateur</h1>
           {lastRefreshedAt && (
             <div className="admin-subtitle">
               Actualisé à {new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).format(lastRefreshedAt)}
@@ -176,9 +172,6 @@ export function AdminDashboard() {
         <div className="admin-topbar-actions">
           <button className="admin-btn admin-btn--outline" onClick={loadAdminData} disabled={loading}>
             {loading ? '⟳ Chargement...' : '⟳ Rafraîchir'}
-          </button>
-          <button className="admin-btn admin-btn--danger" onClick={handleLogout}>
-            Déconnexion
           </button>
         </div>
       </div>

@@ -26,13 +26,13 @@ function Layout({ children }) {
 
   return (
     <div className="app-layout">
-      {!isAuthPage && !isAdminPage && (
+      {!isAuthPage && (
         <Navbar menuOpen={mobileMenuOpen} onMenuToggle={setMobileMenuOpen} />
       )}
       <main>{children}</main>
       {!isAuthPage && <Footer />}
       {!isAuthPage && <ScrollToTop />}
-      {!isAuthPage && !isAdminPage && (
+      {!isAuthPage && (
         <MobileBottomNav isOpen={mobileMenuOpen} onMenuOpen={() => setMobileMenuOpen(prev => !prev)} />
       )}
     </div>
