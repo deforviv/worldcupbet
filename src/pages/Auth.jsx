@@ -89,8 +89,8 @@ export function Auth() {
       e.email = 'Adresse e-mail invalide.';
     if (isLogin && password.length < 1)
       e.password = 'Mot de passe requis.';
-    if (!isLogin && (password.length < 6 || password.length > 12))
-      e.password = 'Le mot de passe doit contenir entre 6 et 12 caractères.';
+    if (!isLogin && (password.length < 6 || password.length > 128))
+      e.password = 'Le mot de passe doit contenir entre 6 et 128 caractères.';
     if (!isLogin && confirmPassword !== password)
       e.confirmPassword = 'Les mots de passe ne correspondent pas.';
     if (!isLogin && !acceptedTerms)
@@ -125,16 +125,6 @@ export function Auth() {
 
     try {
       if (isLogin) {
-        // Frontend-only admin shortcut (no backend): credentials for admin
-        const ADMIN_EMAIL = 'admin@worldcupbet.local';
-        const ADMIN_PASSWORD = 'Admin@1234';
-        if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-          // Create a local admin session and redirect to admin dashboard
-          setAuthSession({ accessToken: 'local-admin-token', user: { id: 'admin', username: 'Administrator', email, role: 'ADMIN' } });
-          await primeWalletSession();
-          navigate('/admin');
-          return;
-        }
         const res = await fetch(`${API_URL}/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -355,10 +345,10 @@ export function Auth() {
               <input
                 type={showPwd ? 'text' : 'password'}
                 className="auth-input auth-input--with-toggle"
-                placeholder={isLogin ? 'Mot de passe' : 'Mot de passe (6 à 12 caractères)'}
+                placeholder={isLogin ? 'Mot de passe' : 'Mot de passe (6 à 128 caractères)'}
                 value={password}
                 onChange={e => setPassword(e.target.value)}
-                maxLength={isLogin ? undefined : 12}
+                maxLength={isLogin ? undefined : 128}
                 autoComplete={isLogin ? 'current-password' : 'new-password'}
               />
               <button
@@ -381,7 +371,7 @@ export function Auth() {
                   placeholder="Confirmer mot de passe"
                   value={confirmPassword}
                   onChange={e => setConfirmPassword(e.target.value)}
-                  maxLength={12}
+                  maxLength={128}
                   autoComplete="new-password"
                 />
                 <button

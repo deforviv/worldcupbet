@@ -22,7 +22,7 @@ const schemas = {
       .max(30, 'Max 30 chars')
       .regex(/^[a-zA-Z0-9_]+$/, 'Only letters, numbers, underscores')
       .optional(),
-    password: z.string().min(6, 'Min 6 characters').max(12, 'Max 12 characters'),
+    password: z.string().min(6, 'Min 6 characters').max(128, 'Max 128 characters'),
     confirmPassword: z.string().min(1, 'Password confirmation required'),
     acceptedTerms: z.literal(true, {
       errorMap: () => ({ message: 'Terms must be accepted' }),
@@ -49,7 +49,7 @@ const schemas = {
   placeBet: z.object({
     matchId: z.string().cuid(),
     oddsId: z.string().cuid(),
-    stakeAmount: z.coerce.number().positive().min(1, 'Min stake 1 EUR').max(1000000, 'Max stake 1,000,000 EUR'),
+    stakeAmount: z.coerce.number().positive().min(1, 'Min stake 1 EUR').max(1000000000, 'Max stake 1,000,000,000 EUR'),
   }),
 
   placeCoupon: z.object({
@@ -57,7 +57,7 @@ const schemas = {
       matchId: z.string().cuid(),
       oddsId: z.string().cuid(),
     })).min(2, 'Coupon requires at least 2 selections').max(20, 'Max 20 selections per coupon'),
-    stakeAmount: z.coerce.number().positive().min(1, 'Min stake 1 EUR').max(1000000, 'Max stake 1,000,000 EUR'),
+    stakeAmount: z.coerce.number().positive().min(1, 'Min stake 1 EUR').max(1000000000, 'Max stake 1,000,000,000 EUR'),
   }),
 
   deposit: z.object({

@@ -8,6 +8,7 @@ import { ArrowUpRight, ArrowDownLeft, Bitcoin, CheckCircle, AlertCircle } from '
 import CryptoSelect from '../components/CryptoSelect';
 import { authFetchJson, getAuthToken } from '../config/api';
 import { useWalletData } from '../hooks/useWalletData';
+import { DEPOSIT_ADDRESSES, DEPOSIT_CRYPTO_OPTIONS, WITHDRAW_CRYPTO_OPTIONS } from '../config/constants';
 import './Wallet.css';
 
 const TABS = [
@@ -22,13 +23,6 @@ const TYPE_LABELS = {
   BET_PLACED: 'Pari placé',
   BET_WIN: 'Gains',
   BET_REFUND: 'Remboursement',
-};
-
-const DEPOSIT_ADDRESSES = {
-  'USDT TRC20/Tron': 'TG1ZibDCAnQcEEA6nwwbnNFutiZHHowamt',
-  'USDT ERC20/Tether': '0xe00cC9E440112a2236c8E6aA43e604aB7Bd76B9E',
-  BTC: 'bc1qmc64hrjp4re4lzhkknsc4f3jmmc8j5clpa32jl',
-  ETH: '0xe00cC9E440112a2236c8E6aA43e604aB7Bd76B9E',
 };
 
 function formatAmount(amount) {
@@ -253,7 +247,7 @@ export function Wallet() {
                   <CryptoSelect
                     value={depositCrypto}
                     onChange={setDepositCrypto}
-                    options={["USDT TRC20/Tron", "USDT ERC20/Tether", "BTC", "ETH"]}
+                    options={DEPOSIT_CRYPTO_OPTIONS}
                   />
                   <div className="input-group wallet-address-group">
                     <label className="input-label">Envoyez les fonds sur cette adresse</label>
@@ -341,7 +335,7 @@ export function Wallet() {
                 <CryptoSelect
                   value={withdrawCrypto}
                   onChange={setWithdrawCrypto}
-                  options={["USDT (TRC20)", "USDT (ERC20)", "BTC", "ETH"]}
+                  options={WITHDRAW_CRYPTO_OPTIONS}
                 />
                 <Input
                   label="Montant à Retirer (EUR)"

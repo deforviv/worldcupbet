@@ -105,7 +105,7 @@ model Wallet {
   id        String   @id @default(cuid())
   userId    String   @unique
   balance   Decimal  @default(0) @db.Decimal(15, 2)
-  currency  String   @default("FCFA")
+  currency  String   @default("EUR")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
